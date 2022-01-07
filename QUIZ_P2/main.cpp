@@ -1,75 +1,64 @@
 //
 //  main.cpp
-//  Priority
+//  convertisseur
 //
-//  Created by Ranga Gonnage on 15/12/2021.
+//  Created by Ranga Gonnage on 14/12/2021.
 //
 
 #include <iostream>
-#include <string>
-#include <ctime>
-#include <cstdlib>
-
-#include "main.hpp"
 
 using namespace std;
 
-void melangerLettres(string *mot)
-{
-    string melange;
-    int position(0);
-    std::cout << *mot << endl;
-
-   //Tant qu'on n'a pas extrait toutes les lettres du mot
-    while (mot->size() != 0)
+int main() {
+    double euroUtilisateur(0);
+    double const ratioDollar(1.20);
+    
+    cout << "Convertisseur euro -> dollar" << endl;
+    
+    cout << "Entrez un montant à convertir en dollar : ";
+    cin >> euroUtilisateur;
+    
+    double resultat = euroUtilisateur * ratioDollar;
+    
+    if (euroUtilisateur < 0)
     {
-        //On choisit un numéro de lettre au hasard dans le mot
-        position = rand() % mot->size();
-        //On ajoute la lettre dans le mot mélangé
-        melange += mot->at(position);
-        //On retire cette lettre du mot mystère
-        //Pour ne pas la prendre une deuxième fois
-        mot->erase(position, 1);
+        cout << "La saisie est incorrecte ! " << endl;
     }
-    //On assigne le mot mélangé au pointeur
-    *mot = melange;
-}
-
-int main()
-{
-    string motMystere, motUtilisateur, *motMelange(nullptr);
-    
-
-    //Initialisation des nombres aléatoires
-    srand(time(0));
-
-    //1 : On demande de saisir un mot
-    cout << "Saisissez un mot à l’abri des regards : ";
-    cin >> motMystere;
-    
-    motMelange = new string(motMystere);
-
-    //2 : On récupère le mot avec les lettres mélangées dans motMelange
-    melangerLettres(motMelange);
-
-    //3 : On demande à l'utilisateur quel est le mot mystère
-    while (motUtilisateur != motMystere)
+    else
     {
-        cout << endl << "Quel est ce mot ? " << *motMelange << endl;
-        cin >> motUtilisateur;
-
-        if (motUtilisateur == motMystere)
-        {
-            cout << "Bravo !" << endl;
-        }
-        else
-        {
-            cout << "Ce n'est pas le mot !" << endl;
-        }
+        cout << euroUtilisateur << "€ équivaut à " << resultat << "$" << endl;
     }
-    //On recommence tant qu'il n'a pas trouvé
-    
-    delete motMelange;
 
     return 0;
 }
+
+// Solution avec la boucle pour la question 8
+
+/*
+int main() {
+    double euroUtilisateur(0);
+    double const ratioDollar(1.20);
+    
+    cout << "Convertisseur euro -> dollar" << endl;
+    
+    do
+    {
+        cout << "Entrez un montant à convertir en dollar : ";
+        cin >> euroUtilisateur;
+        
+        double resultat = euroUtilisateur * ratioDollar;
+        
+        if (euroUtilisateur < 0)
+        {
+            cout << "La saisie est incorrecte ! " << endl;
+        }
+        else
+        {
+            cout << euroUtilisateur << "€ équivaut à " << resultat << "$" << endl;
+        }
+    } while (euroUtilisateur < 0);
+    
+    return 0;
+}
+*/
+
